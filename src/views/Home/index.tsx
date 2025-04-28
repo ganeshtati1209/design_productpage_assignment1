@@ -1,81 +1,70 @@
-import React, { useEffect, useRef } from 'react';
-import HeroSection from './components/HeroSection';
-import HomeFAQs from './components/HomeFAQ';
-import ContactForm from './components/ContactForm';
-import MainFooter from './components/MainFooter';
-import InfoSection from './components/InfoSection';
-import FeaturesGrid from './components/FeaturesGrid';
+import React from 'react';
+import './Home.css';
 
 const Home: React.FC = () => {
-	const contactRef = useRef(null);
-	const aboutRef = useRef(null);
-	const FqRef = useRef(null);
-	const scrollToSection = (ref) => {
-		ref.current.scrollIntoView({ behavior: 'smooth' });
-	};
+  return (
+    <div className="home-container">
+      {/* Navbar */}
+      <header className="navbar">
+        <div className="logo">GoGetWell</div>
+        <nav className="nav-links">
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#about">About</a>
+          <a href="#faq">FAQ</a>
+          <button className="btn-primary">Sign Up</button>
+        </nav>
+      </header>
 
-	useEffect(() => {
-		let lastScrollTop = 0; // Initialize lastScrollTop variable
+      {/* Hero Section */}
+      <section className="hero-section">
+        <h1>Empower Your Health Journey</h1>
+        <p>Everything you need to track, manage, and improve your health — all in one place.</p>
+        <button className="btn-secondary">Get Started for Free</button>
+      </section>
 
-		const handleScroll = () => {
-			const hcf = document.querySelector(".hcf-profile");
-			const scrollTop =
-				document.documentElement.scrollTop || document.body.scrollTop;
+      {/* Features Section */}
+      <section id="features" className="features-section">
+        <h2>Why Choose GoGetWell?</h2>
+        <div className="feature-cards">
+          <div className="feature-card">
+            <h3>Smart Tracking</h3>
+            <p>Monitor your vitals and activities with real-time insights.</p>
+          </div>
+          <div className="feature-card">
+            <h3>Consult Top Experts</h3>
+            <p>Access top doctors and nutritionists easily through the app.</p>
+          </div>
+          <div className="feature-card">
+            <h3>Customized Health Plans</h3>
+            <p>Personalized health programs designed for your unique needs.</p>
+          </div>
+        </div>
+      </section>
 
-			if (scrollTop > lastScrollTop) {
-				if (hcf) {
-					hcf.classList.add("hcf-profile-fixed");
-				}
-			} else if (scrollTop < lastScrollTop) {
-				if (hcf) {
-					hcf.classList.remove("hcf-profile-fixed");
-				}
-			}
+      {/* Pricing Section */}
+      <section id="pricing" className="pricing-section">
+        <h2>Simple Pricing</h2>
+        <div className="pricing-cards">
+          <div className="pricing-card">
+            <h3>Basic</h3>
+            <p>Free</p>
+            <button className="btn-primary">Start Free</button>
+          </div>
+          <div className="pricing-card">
+            <h3>Premium</h3>
+            <p>$9.99 / month</p>
+            <button className="btn-primary">Get Premium</button>
+          </div>
+        </div>
+      </section>
 
-			lastScrollTop = scrollTop;
-		};
-
-
-		// Add scroll event listener
-		window.addEventListener("scroll", handleScroll);
-
-		// Cleanup the event listener on unmount
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
-	return (
-		<>
-			<div>
-				<div className="">
-					<HeroSection
-						scrollToSection={scrollToSection}
-						featuresRef={FqRef}
-						contactRef={contactRef}
-						aboutRef={aboutRef}
-					/>
-					{/* <div className='bg-white'>
-						<ClaimLandingSection />
-					</div> */}
-					<div className='!bg-[#eff6ff] relative'>
-						<FeaturesGrid />
-					</div>
-					<div className='!bg-white relative' ref={aboutRef}>
-						<InfoSection />
-					</div>
-					<div className='relative bg-white' ref={FqRef}>
-						<HomeFAQs />
-					</div>
-					<div className='bg-white relative' ref={contactRef}>
-						<ContactForm />
-					</div>
-					{/* <div className='bg-white'>
-						<MainFooter />
-					</div> */}
-				</div>
-			</div>
-		</>
-	);
+      {/* Footer */}
+      <footer className="footer">
+        <p>© 2025 GoGetWell.ai | Designed for a healthier tomorrow</p>
+      </footer>
+    </div>
+  );
 };
 
 export default Home;

@@ -1,27 +1,17 @@
-import { BrowserRouter } from 'react-router-dom'
-import Theme from '@/components/template/Theme'
-import Layout from '@/components/layouts'
-import { AuthProvider } from '@/auth'
-import Views from '@/views'
-import appConfig from './configs/app.config'
-import './locales'
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Home from './views/Home/index';   // Home page you redesigned
+import AboutPage from './views/about/AboutPage';
+import FAQPage from './views/faq/FAQPage';
 
-if (appConfig.enableMock) {
-    import('./mock')
-}
+const App: React.FC = () => {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />          {/* Home page */}
+      <Route path="/about" element={<AboutPage />} /> {/* About page */}
+      <Route path="/faq" element={<FAQPage />} />     {/* FAQ page */}
+    </Routes>
+  );
+};
 
-function App() {
-    return (
-        <Theme>
-            <BrowserRouter>
-                <AuthProvider>
-                    <Layout>
-                        <Views />
-                    </Layout>
-                </AuthProvider>
-            </BrowserRouter>
-        </Theme>
-    )
-}
-
-export default App
+export default App;
